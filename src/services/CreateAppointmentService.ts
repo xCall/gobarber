@@ -10,7 +10,7 @@ interface IRequest {
 }
 
 class CreateAppointementService {
-  public async execute({ date, provider }: IRequest): Promise<Appointment> {
+  public async execute({ provider, date }: IRequest): Promise<Appointment> {
     const appointmentsRepository = getCustomRepository(AppointmentsRepository);
     const appointmentDate = startOfHour(date);
 
