@@ -1,4 +1,4 @@
-import { startOfHour } from 'date-fns/esm';
+import { startOfHour } from 'date-fns';
 import { getCustomRepository } from 'typeorm';
 
 import { Appointment } from '../models/Appointment';
