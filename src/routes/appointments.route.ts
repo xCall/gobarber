@@ -9,10 +9,10 @@ const port = 3333;
 
 const appointmentRouter = Router();
 
-appointmentRouter.get('/', (request, response) => {
+appointmentRouter.get('/', async (request, response) => {
   const appointmentsRepository = getCustomRepository(AppointmentsRepository);
 
-  const appointments = appointmentsRepository.find();
+  const appointments = await appointmentsRepository.find();
 
   console.log('\x1b[33m', `GET - (Appointments) ➡️  http://localhost:${port}/`);
 
