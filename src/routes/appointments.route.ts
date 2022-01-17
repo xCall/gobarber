@@ -7,19 +7,19 @@ import { CreateAppointementService } from '../services/CreateAppointmentService'
 
 const port = 3333;
 
-const appointmentRouter = Router();
+const appointmentsRouter = Router();
 
-appointmentRouter.get('/', async (request, response) => {
+appointmentsRouter.get('/', async (request, response) => {
   const appointmentsRepository = getCustomRepository(AppointmentsRepository);
 
   const appointments = await appointmentsRepository.find();
 
-  console.log('\x1b[33m', `GET - (Appointments) ➡️  http://localhost:${port}/`);
+  console.log('\x1b[33m', `✔ GET - (Appointments) ➡️  http://localhost:${port}/appointments`);
 
   return response.json(appointments);
 });
 
-appointmentRouter.post('/', async (request, response) => {
+appointmentsRouter.post('/', async (request, response) => {
   try {
     const { provider, date } = request.body;
     const parseDate = parseISO(date);
@@ -29,13 +29,13 @@ appointmentRouter.post('/', async (request, response) => {
       date: parseDate,
     });
 
-    console.log('\x1b[34m', `POST - (Appointments) ➡️  http://localhost:${port}/`);
+    console.log('\x1b[34m', `✔ POST - (Appointments) ➡️  http://localhost:${port}/appointments`);
 
     return response.json(appointment);
   } catch (err) {
-    console.log('\x1b[31m', `POST - (Appointments) ➡️  http://localhost:${port}/`);
+    console.log('\x1b[31m', `✗ POST - (Appointments) ➡️  http://localhost:${port}/appointments`);
     return response.status(400).json({ error: err.message });
   }
 });
 
-export { appointmentRouter };
+export { appointmentsRouter };
