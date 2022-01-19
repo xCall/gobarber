@@ -16,6 +16,8 @@ usersRouter.post('/', async (request, response) => {
       password,
     });
 
+    delete user.password;
+
     console.log('\x1b[34m', `✔ POST - (Users) ➡️  http://localhost:${port}/users`);
 
     return response.json(user);
