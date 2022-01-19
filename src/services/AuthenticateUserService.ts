@@ -1,4 +1,5 @@
 import { compare } from 'bcryptjs';
+import { sign } from 'jsonwebtoken';
 import { getRepository } from 'typeorm';
 
 import { User } from '../models/User';
@@ -10,6 +11,7 @@ interface IRequest {
 
 interface IResponse {
   user: User;
+  token: string;
 }
 
 class AuthenticateUserService {
@@ -22,14 +24,24 @@ class AuthenticateUserService {
       throw new Error('Incorrect email or password combination.');
     }
 
-    const passwordMatchd = compare(password, user.password);
+    const passwordMatchd = await compare(password, user.password);
 
     if (!passwordMatchd) {
       throw new Error('Incorrect email or password combination.');
     }
 
+    const token = sign(
+      {},
+      'b56db73d20d2d4b374aae5e5c86b58f6',
+      {
+        subject: user.id,
+        expiresIn: '1d',
+      },
+    );
+
     return {
       user,
+      token,
     };
   }
 }

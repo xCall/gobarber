@@ -12,13 +12,15 @@ sessionsRouter.post('/', async (request, response) => {
 
     const authenticateUser = new AuthenticateUserService();
 
-    const { user } = await authenticateUser.execute({
+    const { user, token } = await authenticateUser.execute({
       email, password,
     });
 
+    delete user.password;
+
     console.log('\x1b[34m', `✔ POST - (Sessions) ➡️  http://localhost:${port}/sessions`);
 
-    return response.json({ user });
+    return response.json({ user, token });
   } catch (err) {
     console.log('\x1b[31m', `✗ POST - (Sessions) ➡️  http://localhost:${port}/sessions`);
     return response.status(400).json({ error: err.message });
