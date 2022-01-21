@@ -16,28 +16,34 @@ appointmentsRouter.get('/', async (request, response) => {
 
   const appointments = await appointmentsRepository.find();
 
-  console.log('\x1b[33m', `✔ GET - (Appointments) ➡️  http://localhost:${port}/appointments`);
+  console.log(
+    '\x1b[33m',
+    `✔ GET - (Appointments) ➡️  http://localhost:${port}/appointments`,
+  );
 
   return response.json(appointments);
 });
 
 appointmentsRouter.post('/', async (request, response) => {
-  try {
-    const { provider_id, date } = request.body;
-    const parseDate = parseISO(date);
-    const createAppointment = new CreateAppointementService();
-    const appointment = await createAppointment.execute({
-      provider_id,
-      date: parseDate,
-    });
+  const { provider_id, date } = request.body;
+  const parseDate = parseISO(date);
+  const createAppointment = new CreateAppointementService();
+  const appointment = await createAppointment.execute({
+    provider_id,
+    date: parseDate,
+  });
 
-    console.log('\x1b[34m', `✔ POST - (Appointments) ➡️  http://localhost:${port}/appointments`);
+  console.log(
+    '\x1b[34m',
+    `✔ POST - (Appointments) ➡️  http://localhost:${port}/appointments`,
+  );
 
-    return response.json(appointment);
-  } catch (err) {
-    console.log('\x1b[31m', `✗ POST - (Appointments) ➡️  http://localhost:${port}/appointments`);
-    return response.status(400).json({ error: err.message });
-  }
+  return response.json(appointment);
+
+  /*  console.log(
+     '\x1b[31m',
+     `✗ POST - (Appointments) ➡️  http://localhost:${port}/appointments`,
+   ); */
 });
 
 export { appointmentsRouter };
