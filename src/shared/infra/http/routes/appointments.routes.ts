@@ -2,9 +2,10 @@ import { parseISO } from 'date-fns';
 import { Router } from 'express';
 import { getCustomRepository } from 'typeorm';
 
+import { AppointmentsRepository } from '../../../../modules/appointments/repositories/AppointmentsRepository';
+import { CreateAppointementService } from '../../../../modules/appointments/services/CreateAppointmentService';
 import { ensureAuthenticated } from '../middlewares/ensureAuthenticated';
-import { AppointmentsRepository } from '../repositories/AppointmentsRepository';
-import { CreateAppointementService } from '../services/CreateAppointmentService';
+
 
 const port = 3333;
 
