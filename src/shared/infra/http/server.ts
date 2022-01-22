@@ -2,10 +2,10 @@ import 'reflect-metadata';
 import express, { Response, Request, NextFunction } from 'express';
 import 'express-async-errors';
 
-import uploadConfig from './config/upload';
-import { AppError } from './shared/errors/AppError';
-import { router } from './shared/infra/http/routes/index';
-import './shared/infra/database';
+import { AppError } from '@shared/errors/AppError';
+import uploadConfig from '@config/upload';
+import { router } from '@shared/infra/http/routes/index';
+import '@shared/infra/typeorm';
 
 const app = express();
 const port = 3333;

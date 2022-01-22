@@ -2,8 +2,8 @@ import { compare } from 'bcryptjs';
 import { sign } from 'jsonwebtoken';
 import { getRepository } from 'typeorm';
 
-import { AppError } from '../../../shared/errors/AppError';
-import authConfig from '../../../config/auth';
+import { AppError } from '@shared/errors/AppError';
+import authConfig from '@config/auth';
 import { User } from '../infra/typeorm/entities/User';
 
 interface IRequest {

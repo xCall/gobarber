@@ -5,11 +5,11 @@
   "username": "postgres",
   "password": "1324",
   "database": "gobarberdb",
-  "entities": ["./src/modules/**/entities/*.ts"],
+  "entities": ["./src/modules/**/infra/typeorm/entities/*.ts"],
   "migrations": [
-    "./src/shared/database/infra/migrations/*.ts"
+    "./src/shared/typeorm/infra/migrations/*.ts"
   ],
   "cli": {
-    "migrationsDir": "./src/shared/database/infra/migrations"
+    "migrationsDir": "./src/shared/typeorm/infra/migrations"
   }
 }
