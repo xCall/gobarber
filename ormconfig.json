@@ -7,9 +7,9 @@
   "database": "gobarberdb",
   "entities": ["./src/modules/**/infra/typeorm/entities/*.ts"],
   "migrations": [
-    "./src/shared/typeorm/infra/migrations/*.ts"
+    "./src/shared/infra/typeorm/migrations/*.ts"
   ],
   "cli": {
-    "migrationsDir": "./src/shared/typeorm/infra/migrations"
+    "migrationsDir": "./src/shared/infra/typeorm/migrations"
   }
 }

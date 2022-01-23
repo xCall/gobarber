@@ -1,34 +1,35 @@
-import { parseISO } from 'date-fns';
-import { Router } from 'express';
-
 import { AppointmentsRepository } from '@modules/appointments/infra/typeorm/repositories/AppointmentsRepository';
 import { CreateAppointementService } from '@modules/appointments/services/CreateAppointmentService';
 import { ensureAuthenticated } from '@modules/users/infra/http/middlewares/ensureAuthenticated';
-
+import { parseISO } from 'date-fns';
+import { Router } from 'express';
 
 const port = 3333;
 
 const appointmentsRouter = Router();
-const appointmentsRepository = new AppointmentsRepository();
 appointmentsRouter.use(ensureAuthenticated);
 
-appointmentsRouter.get('/', async (request, response) => {
-  
+/* appointmentsRouter.get('/', async (request, response) => {
 
- /*  const appointments = await appointmentsRepository.find();
+  const appointmentsRepository = new AppointmentsRepository();
 
-  console.log(
-    '\x1b[33m',
-    `✔ GET - (Appointments) ➡️  http://localhost:${port}/appointments`,
-  );
-
-  return response.json(appointments); */
-});
+ const appointments = await appointmentsRepository.find();
+ 
+   console.log(
+     '\x1b[33m',
+     `✔ GET - (Appointments) ➡️  http://localhost:${port}/appointments`,
+   );
+ 
+   return response.json(appointments);
+}); */
 
 appointmentsRouter.post('/', async (request, response) => {
+  const appointmentsRepository = new AppointmentsRepository();
   const { provider_id, date } = request.body;
   const parseDate = parseISO(date);
-  const createAppointment = new CreateAppointementService(appointmentsRepository);
+  const createAppointment = new CreateAppointementService(
+    appointmentsRepository,
+  );
   const appointment = await createAppointment.execute({
     provider_id,
     date: parseDate,

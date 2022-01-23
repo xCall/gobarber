@@ -1,6 +1,7 @@
 import { startOfHour } from 'date-fns';
 
 import { AppError } from '@shared/errors/AppError';
+
 import { Appointment } from '../infra/typeorm/entities/Appointment';
 import { IAppointmentsRepository } from '../repositories/IAppointmentsRepository';
 
@@ -10,16 +11,12 @@ interface IRequest {
 }
 
 class CreateAppointementService {
-  constructor(private appointmentsRepository: IAppointmentsRepository) {
-
-  }
+  constructor(private appointmentsRepository: IAppointmentsRepository) {}
   public async execute({ provider_id, date }: IRequest): Promise<Appointment> {
-    
     const appointmentDate = startOfHour(date);
 
-    const findAppointmentInSameDate = await this.appointmentsRepository.findByDate(
-      appointmentDate,
-    );
+    const findAppointmentInSameDate =
+      await this.appointmentsRepository.findByDate(appointmentDate);
 
     if (findAppointmentInSameDate) {
       throw new AppError('This appointment is already booked');
