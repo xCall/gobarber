@@ -6,6 +6,7 @@ import 'express-async-errors';
 import { AppError } from '@shared/errors/AppError';
 import { router } from '@shared/infra/http/routes/index';
 import '@shared/infra/typeorm';
+import '@shared/container';
 
 const app = express();
 const port = 3333;
